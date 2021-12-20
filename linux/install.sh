@@ -1162,6 +1162,7 @@ install_download() {
         $cmd install -y lrzsz git zip unzip curl wget supervisor
         service supervisor restart
     else
+	    $cmd install -y epel-release
         $cmd update -y
         $cmd install -y lrzsz git zip unzip curl wget supervisor
         systemctl enable supervisord

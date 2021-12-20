@@ -443,7 +443,11 @@
             tableStr += "<tr>";
             tableStr += "<td>" + configDesc[key] + "</td>";
             tableStr += "<td>" + key + "</td>";
-            tableStr += "<td>" + (data[key] === true ? "是" : (data[key] === false ? "否" : data[key])) + "</td>";
+            if (key.indexOf('DevPercent') !== -1) {
+                tableStr += "<td>" + parseFloat(data[key].toFixed(2)) + "</td>";
+            } else {
+                tableStr += "<td>" + (data[key] === true ? "是" : (data[key] === false ? "否" : data[key])) + "</td>";
+            }
             tableStr += "</tr>";
         }
         $("#configTbody").html(tableStr);
