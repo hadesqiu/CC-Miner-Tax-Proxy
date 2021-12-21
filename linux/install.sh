@@ -1162,7 +1162,7 @@ install_download() {
         $cmd install -y lrzsz git zip unzip curl wget supervisor
         service supervisor restart
     else
-	    $cmd install -y epel-release
+        $cmd install -y epel-release
         $cmd update -y
         $cmd install -y lrzsz git zip unzip curl wget supervisor
         systemctl enable supervisord
@@ -1352,7 +1352,7 @@ write_json() {
         echo "  \"enableHttpLog\": false," >>$jsonPath
     fi
 
-    echo "  \"version\": \"4.1.0\"" >>$jsonPath
+    echo "  \"version\": \"5.0.2\"" >>$jsonPath
     echo "}" >>$jsonPath
     if [[ $cmd == "apt-get" ]]; then
         ufw reload
@@ -1420,13 +1420,15 @@ start_write_config() {
     changeLimit="n"
     if [[ "$needChangeLimit" = "y" ]]; then
         if [ $(grep -c "root soft nofile" /etc/security/limits.conf) -eq '0' ]; then
-            echo "root soft nofile 100000" >>/etc/security/limits.conf
+            echo "root soft nofile 102400" >>/etc/security/limits.conf
             changeLimit="y"
         fi
         if [ $(grep -c "root hard nofile" /etc/security/limits.conf) -eq '0' ]; then
-            echo "root hard nofile 100000" >>/etc/security/limits.conf
+            echo "root hard nofile 102400" >>/etc/security/limits.conf
             changeLimit="y"
         fi
+        ulimit -HSn 65535
+        benefit_core
     fi
 
     clear
@@ -1445,6 +1447,50 @@ start_write_config() {
     fi
     echo "----------------------------------------------------------------"
     supervisorctl reload
+}
+
+benefit_core() {
+    if [ $(grep -c "net.ipv4.tcp_max_tw_buckets" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_max_tw_buckets = 4096" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "fs.file-max" /etc/sysctl.conf) -eq '0' ]; then
+        echo "fs.file-max = 9223372036854775807" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.ip_local_port_range" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.ip_local_port_range = 1024 65000" >>/etc/sysctl.conf
+    fi 
+    if [ $(grep -c "net.ipv4.tcp_fin_timeout" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_fin_timeout = 30" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_keepalive_time" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_keepalive_time = 1800" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_tw_reuse" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_tw_reuse = 1" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_timestamps" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_timestamps = 1" >>/etc/sysctl.conf
+    fi   
+    if [ $(grep -c "net.core.netdev_max_backlog" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.core.netdev_max_backlog = 12000" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.core.somaxconn" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.core.somaxconn = 16384" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_max_syn_backlog" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_max_syn_backlog = 16384" >>/etc/sysctl.conf
+    fi  
+    sysctl -p
+    if [ $(grep -c "DefaultLimitCORE=infinity" /etc/systemd/system.conf) -eq '0' ]; then
+        echo "DefaultLimitCORE=infinity" >>/etc/systemd/system.conf
+        echo "DefaultLimitNOFILE=100000" >>/etc/systemd/system.conf
+        echo "DefaultLimitNPROC=100000" >>/etc/systemd/system.conf
+    fi
+    if [ $(grep -c "DefaultLimitCORE=infinity" /etc/systemd/user.conf) -eq '0' ]; then
+        echo "DefaultLimitCORE=infinity" >>/etc/systemd/user.conf
+        echo "DefaultLimitNOFILE=100000" >>/etc/systemd/user.conf
+        echo "DefaultLimitNPROC=100000" >>/etc/systemd/user.conf
+    fi
 }
 
 install() {
