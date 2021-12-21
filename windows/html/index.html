@@ -254,7 +254,7 @@
            style="display: none;">
     <label for="tabBtc" id="labBtc" style="display: none;">BTC信息</label>
 
-    <a id="logButton" href="/log.html" target="_blank">
+    <a id="logButton" href="/log.html" target="_blank" style="display: none;">
         查看原始日志
     </a>
 
@@ -425,6 +425,9 @@
 
     function onConfigLoaded(data) {
         $("#main").show();
+        if (data.enableLog) {
+            $("#logButton").show();
+        }
         if (data.enableEthProxy) {
             $("#tabEth").show();
             $("#labEth").show();
