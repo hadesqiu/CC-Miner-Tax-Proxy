@@ -35,8 +35,6 @@ return devPercent;
 
 [Linux](https://github.com/CaoCaoMiner/CC-Miner-Tax-Proxy/tree/master/linux/)(支持一键脚本安装)
 
-[MacOs](https://github.com/CaoCaoMiner/CC-Miner-Tax-Proxy/tree/master/linux/)
-
 所有版本均包含一个网页版的监控平台，可配置是否启用
 
 ## 日你妈

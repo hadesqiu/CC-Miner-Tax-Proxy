@@ -254,7 +254,7 @@
            style="display: none;">
     <label for="tabBtc" id="labBtc" style="display: none;">BTC信息</label>
 
-    <a id="logButton" href="/log.html" target="_blank">
+    <a id="logButton" href="/log.html" target="_blank" style="display: none;">
         查看原始日志
     </a>
 
@@ -282,6 +282,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>单机算力</th>
@@ -302,6 +303,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>单机算力</th>
@@ -322,6 +324,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>总提交</th>
@@ -425,6 +428,9 @@
 
     function onConfigLoaded(data) {
         $("#main").show();
+        if (data.enableLog) {
+            $("#logButton").show();
+        }
         if (data.enableEthProxy) {
             $("#tabEth").show();
             $("#labEth").show();
@@ -580,6 +586,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总算力：" + data.base.totalHashRate.toFixed(2) + "M" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "<td>" + "总抽水：" + (data.base.donateSubmit + data.base.devSubmit) + "&nbsp;&nbsp;/&nbsp;&nbsp;用户：" + data.base.donateSubmit + "&nbsp;&nbsp;/&nbsp;&nbsp;开发：" + data.base.devSubmit + "</td>";
@@ -591,6 +598,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].hashRate.toFixed(2) + "M" + "</td>";
@@ -611,6 +619,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总算力：" + data.base.totalHashRate.toFixed(2) + "M" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "<td>" + "总抽水：" + (data.base.donateSubmit + data.base.devSubmit) + "&nbsp;&nbsp;/&nbsp;&nbsp;用户：" + data.base.donateSubmit + "&nbsp;&nbsp;/&nbsp;&nbsp;开发：" + data.base.devSubmit + "</td>";
@@ -622,6 +631,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].hashRate.toFixed(2) + "M" + "</td>";
@@ -642,6 +652,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "<td>" + "总抽水：" + (data.base.donateSubmit + data.base.devSubmit) + "&nbsp;&nbsp;/&nbsp;&nbsp;用户：" + data.base.donateSubmit + "&nbsp;&nbsp;/&nbsp;&nbsp;开发：" + data.base.devSubmit + "</td>";
             tableStr += "</tr>";
@@ -652,6 +663,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].totalSubmit + "</td>";
