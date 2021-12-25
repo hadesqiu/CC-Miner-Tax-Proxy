@@ -278,6 +278,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>单机算力</th>
@@ -297,6 +298,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>单机算力</th>
@@ -316,6 +318,7 @@
                         <th>序号</th>
                         <th>在线时长</th>
                         <th>客户端IP</th>
+                        <th>连接端口</th>
                         <th>钱包名</th>
                         <th>矿工名</th>
                         <th>总提交</th>
@@ -357,8 +360,6 @@
 
     var isInConfig = true, isInEth = false, isInEtc = false, isInBtc = false;
     var configDesc = {
-        "enableLog": "启用日志",
-
         "ethPoolAddress": "ETH矿池地址",
         "ethPoolSslMode": "ETH矿池端口是否SSL模式",
         "ethPoolPort": "ETH矿池端口",
@@ -546,6 +547,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总算力：" + data.base.totalHashRate.toFixed(2) + "M" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "</tr>";
@@ -556,6 +558,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].hashRate.toFixed(2) + "M" + "</td>";
@@ -575,6 +578,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总算力：" + data.base.totalHashRate.toFixed(2) + "M" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "</tr>";
@@ -585,6 +589,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].hashRate.toFixed(2) + "M" + "</td>";
@@ -604,6 +609,7 @@
             tableStr += "<td>" + "总连接矿机：" + data.base.totalClients + "</td>";
             tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "-" + "</td>";
+            tableStr += "<td>" + "-" + "</td>";
             tableStr += "<td>" + "总提交区块：" + data.base.totalSubmit + "</td>";
             tableStr += "</tr>";
         }
@@ -613,6 +619,7 @@
             tableStr += "<td>" + icount + "</td>";
             tableStr += "<td>" + calcTimeDiff(data.clients[key].connectTime) + "</td>";
             tableStr += "<td>" + data.clients[key].ip + "</td>";
+            tableStr += "<td>" + data.clients[key].port + "</td>";
             tableStr += "<td>" + data.clients[key].walletName + "</td>";
             tableStr += "<td>" + data.clients[key].workerName + "</td>";
             tableStr += "<td>" + data.clients[key].totalSubmit + "</td>";
