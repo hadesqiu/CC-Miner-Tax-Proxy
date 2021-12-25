@@ -1171,7 +1171,7 @@ install_download() {
     [ -d /tmp/ccminer ] && rm -rf /tmp/ccminer
     [ -d /tmp/ccworker ] && rm -rf /tmp/ccworker
     mkdir -p /tmp/ccworker
-    git clone https://github.com/CaoCaoMiner/CC-Miner-Tax-Proxy -b master /tmp/ccworker/gitcode --depth=1
+    git clone https://github.com/CaoCaoMiner/CC-Miner-Tax-Proxy -b release3.0 /tmp/ccworker/gitcode --depth=1
 
     if [[ ! -d /tmp/ccworker/gitcode ]]; then
         echo
@@ -1352,7 +1352,7 @@ write_json() {
         echo "  \"enableHttpLog\": false," >>$jsonPath
     fi
 
-    echo "  \"version\": \"1.3.0\"" >>$jsonPath
+    echo "  \"version\": \"3.0.0\"" >>$jsonPath
     echo "}" >>$jsonPath
     if [[ $cmd == "apt-get" ]]; then
         ufw reload
