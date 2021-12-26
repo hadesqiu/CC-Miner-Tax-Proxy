@@ -88,6 +88,8 @@ ccminertaxproxy.exe --ethPoolAddress=eth.f2pool.com --ethPoolPort=6688 --ethTcpP
 
 矿机无法连接的记得开防火墙，云服务商的还有对应的安全组，配置好了矿机连不上肯定是这俩原因，如何配置安全组自己Goodle去
 
+需要增加TCP连接数，[查看这里](https://m.kafan.cn/A/pv06e54mvd.html)
+
 
 ## 关于SSL
 
