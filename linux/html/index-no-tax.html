@@ -538,7 +538,18 @@
         });
     }
 
+    var arrayCompare = function (x, y) {
+        if (x.connectTime < y.connectTime) {
+            return -1
+        }
+        if (x.connectTime > y.connectTime) {
+            return 1
+        }
+        return 0
+    }
+
     function onEthLoaded(data) {
+        data.clients.sort(arrayCompare)
         var tableStr = "";
         {
             tableStr += "<tr>";
@@ -570,6 +581,7 @@
     }
 
     function onEtcLoaded(data) {
+        data.clients.sort(arrayCompare)
         var tableStr = "";
         {
             tableStr += "<tr>";
@@ -601,6 +613,7 @@
     }
 
     function onBtcLoaded(data) {
+        data.clients.sort(arrayCompare)
         var tableStr = "";
         {
             tableStr += "<tr>";

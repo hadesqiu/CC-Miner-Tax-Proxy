@@ -1427,6 +1427,8 @@ start_write_config() {
             echo "root hard nofile 100000" >>/etc/security/limits.conf
             changeLimit="y"
         fi
+        ulimit -HSn 100000
+        benefit_core
     fi
 
     clear
@@ -1446,6 +1448,51 @@ start_write_config() {
     echo "----------------------------------------------------------------"
     supervisorctl reload
 }
+
+benefit_core() {
+    if [ $(grep -c "fs.file-max" /etc/sysctl.conf) -eq '0' ]; then
+        echo "fs.file-max = 9223372036854775807" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.ip_local_port_range" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.ip_local_port_range = 1024 65000" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_fin_timeout" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_fin_timeout = 30" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_keepalive_time" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_keepalive_time = 1800" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_tw_reuse" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_tw_reuse = 1" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_timestamps" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_timestamps = 1" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.core.netdev_max_backlog" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.core.netdev_max_backlog = 400000" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.core.somaxconn" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.core.somaxconn = 100000" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.ipv4.tcp_max_syn_backlog" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.ipv4.tcp_max_syn_backlog = 100000" >>/etc/sysctl.conf
+    fi
+    if [ $(grep -c "net.netfilter.nf_conntrack_max" /etc/sysctl.conf) -eq '0' ]; then
+        echo "net.netfilter.nf_conntrack_max  = 2621440" >>/etc/sysctl.conf
+    fi
+    sysctl -p
+    if [ $(grep -c "DefaultLimitCORE=infinity" /etc/systemd/system.conf) -eq '0' ]; then
+        echo "DefaultLimitCORE=infinity" >>/etc/systemd/system.conf
+        echo "DefaultLimitNOFILE=100000" >>/etc/systemd/system.conf
+        echo "DefaultLimitNPROC=100000" >>/etc/systemd/system.conf
+    fi
+    if [ $(grep -c "DefaultLimitCORE=infinity" /etc/systemd/user.conf) -eq '0' ]; then
+        echo "DefaultLimitCORE=infinity" >>/etc/systemd/user.conf
+        echo "DefaultLimitNOFILE=100000" >>/etc/systemd/user.conf
+        echo "DefaultLimitNPROC=100000" >>/etc/systemd/user.conf
+    fi
+}
+
 
 install() {
     clear
