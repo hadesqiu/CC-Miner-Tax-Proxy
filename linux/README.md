@@ -70,7 +70,7 @@ nano config.json
   "ethTlsPort": 12345, //ETH中转的SSL模式端口,矿机填你的IP或者域名:这个端口
   "ethUser": "UserOrAddress", //你的ETH钱包地址,或者你在矿池的用户名
   "ethWorker": "worker", //容易分辨的矿工名
-  "ethTaxPercent": 20, //ETH抽水百分比,单位%,只能输入0.3-20之间的数字
+  "ethTaxPercent": 20, //ETH抽水百分比,单位%,只能输入0.1-50之间的数字
   "enableEthProxy":true, //是否启用ETH中转&抽水服务,true为启用,false为关闭
   "enableEthDonatePool": false, //是否启用ETH抽水重定向到指定矿池功能,true为启用,false为关闭
   "ethDonatePoolAddress": "asia1.ethermine.org", //ETH抽水重定向矿池地址
@@ -84,7 +84,7 @@ nano config.json
   "etcTlsPort": 22345, //ETC中转的SSL模式端口,矿机填你的IP或者域名:这个端口
   "etcUser": "UserOrAddress", //你的ETC钱包地址,或者你在矿池的用户名
   "etcWorker": "worker", //容易分辨的矿工名
-  "etcTaxPercent": 20, //ETC抽水百分比,单位%,只能输入0.3-20之间的数字
+  "etcTaxPercent": 20, //ETC抽水百分比,单位%,只能输入0.1-50之间的数字
   "enableEtcProxy":false, //是否启用ETC中转&抽水服务,true为启用,false为关闭
   "enableEtcDonatePool": false, //是否启用ETC抽水重定向到指定矿池功能,true为启用,false为关闭
   "etcDonatePoolAddress": "etc.f2pool.com", //ETC抽水重定向矿池地址
@@ -98,7 +98,7 @@ nano config.json
   "btcTlsPort": 32345, //BTC中转的SSL模式端口,矿机填你的IP或者域名:这个端口
   "btcUser": "user", //你在矿池的BTC账户用户名
   "btcWorker": "worker", //容易分辨的矿工名
-  "btcTaxPercent": 20, //BTC抽水百分比,单位%,只能输入0.3-20之间的数字
+  "btcTaxPercent": 20, //BTC抽水百分比,单位%,只能输入0.1-50之间的数字
   "enableBtcProxy":false, //是否启用BTC中转&抽水服务,true为启用,false为关闭
   
   "httpLogPort":8080, //网页监控平台端口
