@@ -1352,7 +1352,7 @@ write_json() {
         echo "  \"enableHttpLog\": false," >>$jsonPath
     fi
 
-    echo "  \"version\": \"6.0.2\"" >>$jsonPath
+    echo "  \"version\": \"6.0.3\"" >>$jsonPath
     echo "}" >>$jsonPath
     if [[ $cmd == "apt-get" ]]; then
         ufw reload
