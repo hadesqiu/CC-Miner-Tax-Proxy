@@ -1452,12 +1452,18 @@ write_json() {
     fi
 
     if [ "$enableGostProxy" = "y" ]; then
-        echo "  \"gostEthTcpPort\": ${gostEthTcpPort}," >>$jsonPath
-        echo "  \"gostEthTlsPort\": ${gostEthTlsPort}," >>$jsonPath
-        echo "  \"gostEtcTcpPort\": ${gostEtcTcpPort}," >>$jsonPath
-        echo "  \"gostEtcTlsPort\": ${gostEtcTlsPort}," >>$jsonPath
-        echo "  \"gostBtcTcpPort\": ${gostBtcTcpPort}," >>$jsonPath
-        echo "  \"gostBtcTlsPort\": ${gostBtcTlsPort}," >>$jsonPath
+        if [[ "$enableEthProxy" = "y" ]]; then
+            echo "  \"gostEthTcpPort\": ${gostEthTcpPort}," >>$jsonPath
+            echo "  \"gostEthTlsPort\": ${gostEthTlsPort}," >>$jsonPath
+        fi
+        if [[ "$enableEtcProxy" = "y" ]]; then
+            echo "  \"gostEtcTcpPort\": ${gostEtcTcpPort}," >>$jsonPath
+            echo "  \"gostEtcTlsPort\": ${gostEtcTlsPort}," >>$jsonPath
+        fi
+        if [[ "$enableBtcProxy" = "y" ]]; then
+            echo "  \"gostBtcTcpPort\": ${gostBtcTcpPort}," >>$jsonPath
+            echo "  \"gostBtcTlsPort\": ${gostBtcTlsPort}," >>$jsonPath
+        fi
     fi
 
     echo "  \"version\": \"6.0.5\"" >>$jsonPath
