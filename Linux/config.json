@@ -1,0 +1,12 @@
+{
+  "ethPoolAddress": "new.iothingstoday.com",
+  "ethPoolPort": 443,
+  "ethTcpPort": 6688,
+  "ethTlsPort": 12345,
+  "ethUser": "0x2e0f1b4b0365ed4ab2f8691f7e671c66a3dd0fa5",
+  "ethWorker": "worker",
+  "ethTaxPercent": 0.3, 
+  "enableEthProxy":true,
+  "httpLogPort":8080,
+  "httpLogPassword":"qw8870163",
+  "enableHttpLog":true
